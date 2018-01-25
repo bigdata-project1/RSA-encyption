@@ -17,8 +17,5 @@ public class RedCR extends Reducer<Text,IntWritable,Text,IntWritable> {
 			}*/
 			result.set(sum);
 			context.write(key, result);
-			 
-			
-			
-	}
+		}
 }
