@@ -4,22 +4,22 @@ import java.util.StringTokenizer;
 import org.apache.hadoop.io.*;  		  
 import org.apache.hadoop.mapreduce.*; 
 
-public class RSAMap extends Mapper<Object, Text, Text, IntWritable>{
+public class RSAMap extends Mapper<Object, Text, Text, NullWritable>{
 
 	 
 	private Text word = new Text();
 
 	public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
-		IntWritable one=new IntWritable(1);
+		NullWritable one=NullWritable.get();
 		String line = value.toString(); 
 		StringTokenizer tokenizer = new StringTokenizer(line);
 		while (tokenizer.hasMoreTokens()) {
 			word.set(tokenizer.nextToken());
-			int pt[]=new int[100];
-			int ct[]=new int[100];
+			int pt[]=new int[200];
+			int ct[]=new int[200];
 			int z,n,wlen,e;
-			int p=11;
-			int q=3;
+			int p=11;     //any prime number greater than 11
+			int q=3;    
 			n=p*q;
 			z=(p-1)*(q-1);
 			for(e=2;e<z;e++)
@@ -42,7 +42,7 @@ public class RSAMap extends Mapper<Object, Text, Text, IntWritable>{
 				String s[]=Arrays.stream(ct).mapToObj(String::valueOf).toArray(String[]::new);
 				 for(int i=0;i<wlen;i++)
 				 {
-			     Text t=new Text(s[i]);
+			          Text t=new Text(s[i]);
 			     
 				  context.write(t,one);
 				 }
