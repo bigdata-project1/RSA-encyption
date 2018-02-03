@@ -25,7 +25,7 @@ public class DriverRSA  {
 		job.setReducerClass(Reducer.class);
 		
 		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(IntWritable.class);		
+		job.setOutputValueClass(NullWritable.class);		
 			
 		FileInputFormat.addInputPath(job, new Path(args[0]));
 		//FileInputFormat.addInputPath(job, new Path("D:/Eclipse Project/HadoopV1/LogNASA.txt"));
